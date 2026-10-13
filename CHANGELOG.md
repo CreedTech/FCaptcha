@@ -13,6 +13,30 @@ the project uses [Semantic Versioning](https://semver.org/) — with the caveat
 that pre-2.0 it has used minor bumps for behaviour changes that a stricter
 reading would call major. Read the **Breaking** entries rather than the number.
 
+## [1.44.0] — 2026-10-12
+
+### Security
+- Go builds and the published image move to Go 1.26.9 / 1.27.2, which fix
+  vulnerabilities in `net/http`, `crypto/tls`, `mime/multipart` and
+  `net/textproto` (#117).
+- server-node: `proxy-addr` 2.0.8 (GHSA-jqcg-44mw-7w3h) (#111).
+
+### Changed
+- Go and Python now run the advanced fingerprint checks Node already had
+  (speech voices, media devices, fonts vs platform, worker consistency, CSS
+  pointer, navigator APIs, DOMRect). Python scores the `datacenter` and
+  `tor_vpn` categories with the same weights as Go and Node (#112).
+- The "PoW timing suggests external processing" check now fires above 10× the
+  expected solve time instead of 3×, on all three servers, so slow devices
+  are not flagged (#112).
+- Go and Python flag missing `navigator.languages` and window outer dimensions
+  only when the client reports them as `false`, not when the field is absent
+  (#112).
+
+### Dependencies
+- fastapi 0.143, pydantic 2.14, go-redis 9.23, plus base image and JavaScript
+  maintenance updates (#113–#116).
+
 ## [1.43.0] — 2026-10-04
 
 ### Added
