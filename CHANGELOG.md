@@ -13,6 +13,27 @@ the project uses [Semantic Versioning](https://semver.org/) — with the caveat
 that pre-2.0 it has used minor bumps for behaviour changes that a stricter
 reading would call major. Read the **Breaking** entries rather than the number.
 
+## [1.45.0] — 2026-10-13
+
+### Added
+- A checkbox widget inside a `<form>` now adds a hidden `fcaptcha_token` input
+  and fills it on success, clearing it on reset and expiry, so no callback is
+  needed. Rename it with `responseFieldName` / `data-response-field-name`, or
+  turn it off with `responseField: false` / `data-response-field="false"`. A
+  form that already has a field of that name is left alone (#119).
+- The widget is also served at `/turnstile/v0/api.js`, `/1/api.js` and
+  `/recaptcha/api.js`. Loaded from one of those paths it provides that
+  provider's JavaScript API (`render`, `getResponse`, `reset`, `remove`,
+  `execute`, `ready`) and fills its form field, so an app that lets you change
+  a Turnstile, hCaptcha or reCAPTCHA script and siteverify URL can point both
+  at FCaptcha. Loaded as `/fcaptcha.js` it installs nothing, and it never
+  replaces an existing provider global. Tested with Gitea (#120).
+
+### Note
+- `score` in siteverify responses is FCaptcha's on every path, where lower is
+  more human. Apps that only check `success` need nothing else; an app that
+  thresholds a reCAPTCHA v3 score will reject real visitors.
+
 ## [1.44.0] — 2026-10-12
 
 ### Security

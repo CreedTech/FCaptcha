@@ -36,13 +36,13 @@ The demo page is now at `http://localhost:3000/demo/`.
 
 ```html
 <form method="post" action="/signup">
-  <input type="hidden" name="fcaptcha_token" id="fcaptcha-token">
-  <div data-fcaptcha="your-site-key" data-endpoint="http://localhost:3000" data-callback="onCaptcha"></div>
+  <div data-fcaptcha="your-site-key" data-endpoint="http://localhost:3000"></div>
   <button>Sign up</button>
 </form>
-<script>function onCaptcha(token) { document.getElementById('fcaptcha-token').value = token; }</script>
 <script src="http://localhost:3000/fcaptcha.js"></script>
 ```
+
+Once the visitor passes, the token is posted with the form as `fcaptcha_token`.
 
 **3. Verify the token on your backend** with the call you already make to Turnstile, reCAPTCHA or hCaptcha, pointed at your own server:
 
@@ -145,7 +145,7 @@ reCAPTCHA v3 score, where higher is more human, will reject real visitors.
 
 ### Docker (recommended)
 
-A **prebuilt public image** is available at [`ghcr.io/webdecoy/fcaptcha`](https://github.com/WebDecoy/FCaptcha/pkgs/container/fcaptcha) for **Linux AMD64 and ARM64**. No GitHub login or source build is required. Use `:latest` to try the current image, or pin a release tag (for example, `:1.44.0`) or digest for reproducible deployments.
+A **prebuilt public image** is available at [`ghcr.io/webdecoy/fcaptcha`](https://github.com/WebDecoy/FCaptcha/pkgs/container/fcaptcha) for **Linux AMD64 and ARM64**. No GitHub login or source build is required. Use `:latest` to try the current image, or pin a release tag (for example, `:1.45.0`) or digest for reproducible deployments.
 
 See the [Docker guide](docker/README.md) for local startup, Compose, version pinning, and upgrades.
 
@@ -245,7 +245,7 @@ Two options, and the tradeoff is real:
 
 <!-- CDN widget: still requires a running FCaptcha API. -->
 <script
-  src="https://cdn.jsdelivr.net/npm/@webdecoy/fcaptcha-client@1.44.0/dist/fcaptcha.min.js"
+  src="https://cdn.jsdelivr.net/npm/@webdecoy/fcaptcha-client@1.45.0/dist/fcaptcha.min.js"
   integrity="sha384-…"
   crossorigin="anonymous"></script>
 ```
